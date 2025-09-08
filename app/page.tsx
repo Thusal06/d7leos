@@ -50,20 +50,28 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Seamless looping carousel of partner logos (dual tracks to avoid gap) */}
+      {/* Seamless looping carousel of partner logos */}
       <div className="glass rounded-2xl p-4 overflow-hidden">
         <div className="relative w-full" style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}>
-          <div className="flex gap-20 whitespace-nowrap">
-            <div className="flex gap-20 marquee-track hover:[animation-play-state:paused]">
-              {partnerLogos.map((logo) => (
-                <img key={`a-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition flex-shrink-0" />
-              ))}
-            </div>
-            <div className="flex gap-20 marquee-track2 hover:[animation-play-state:paused]">
-              {partnerLogos.map((logo) => (
-                <img key={`b-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition flex-shrink-0" />
-              ))}
-            </div>
+          <div className="flex animate-marquee hover:[animation-play-state:paused]">
+            {/* First set of logos */}
+            {partnerLogos.map((logo, index) => (
+              <div key={`set1-${index}`} className="flex-shrink-0 mx-8">
+                <img src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
+              </div>
+            ))}
+            {/* Duplicate set for seamless loop */}
+            {partnerLogos.map((logo, index) => (
+              <div key={`set2-${index}`} className="flex-shrink-0 mx-8">
+                <img src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
+              </div>
+            ))}
+            {/* Third set to ensure no gaps */}
+            {partnerLogos.map((logo, index) => (
+              <div key={`set3-${index}`} className="flex-shrink-0 mx-8">
+                <img src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
+              </div>
+            ))}
           </div>
         </div>
       </div>

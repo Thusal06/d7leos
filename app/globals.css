@@ -52,15 +52,13 @@ body {
   transition: opacity 200ms ease-out;
 }
 
-/* marquee-like horizontal scroll for logo strip */
-@keyframes marquee-x {
+/* Smooth marquee animation for logo carousel */
+@keyframes marquee {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+  100% { transform: translateX(-33.333%); }
 }
-.marquee-track {
-  animation: marquee-x 25s linear infinite;
-}
-.marquee-track2 {
-  animation: marquee-x 25s linear infinite;
-  animation-delay: -12.5s; /* half duration for perfect staggering */
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  width: max-content;
 }
