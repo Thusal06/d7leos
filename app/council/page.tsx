@@ -125,19 +125,23 @@ export default function CouncilPage() {
       {sections.map((section) => (
         <section key={section.title} className="space-y-5">
           <h2 className="heading-serif text-2xl font-semibold">{section.title}</h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-items-center">
             {section.items.map((m, idx) => (
               <motion.div
                 key={`${section.title}-${idx}-${m.name}`}
-                className="glass rounded-xl overflow-hidden group"
+                className="glass rounded-xl overflow-hidden group w-full max-w-xs"
                 whileHover={{ y: -6 }}
               >
-                <img
-                  src={m.photo || '/logos/lion.png'}
-                  alt={m.name}
-                  className="h-44 w-full object-cover"
-                />
-                <div className="p-4">
+                {/* Square image wrapper */}
+                <div className="relative w-full aspect-square overflow-hidden bg-black/5">
+                  <img
+                    src={m.photo || '/logos/lion.png'}
+                    alt={m.name}
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4 text-center">
                   <div className="font-semibold">{m.name}</div>
                   {m.role && <div className="text-sm opacity-70">{m.role}</div>}
                 </div>
