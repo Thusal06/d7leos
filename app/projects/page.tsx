@@ -2,16 +2,83 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface Project { id: string; title: string; category: 'service'|'environment'|'youth'|'joint'; description: string; image: string; date: string; venue: string; impact: string; }
+interface Project { 
+  id: string; 
+  title: string; 
+  category: 'meetings'|'religious'|'service'|'environment'|'youth'|'joint'; 
+  description: string; 
+  image: string; 
+  date: string; 
+  venue: string; 
+  impact: string;
+  gallery: string[];
+}
 
 const allProjects: Project[] = [
-  { id: 'p1', title: 'Tree Planting', category: 'environment', description: 'Community reforestation drive.', image: '/images/p1.jpg', date: '2024-09-10', venue: 'Colombo', impact: '500+ trees planted' },
-  { id: 'p2', title: 'Youth Leadership Workshop', category: 'youth', description: 'Skill-building sessions.', image: '/images/p2.jpg', date: '2024-08-20', venue: 'Galle', impact: '120 participants' },
-  { id: 'p3', title: 'Health Camp', category: 'service', description: 'Free medical checkups.', image: '/images/p3.jpg', date: '2024-07-15', venue: 'Matara', impact: '300+ beneficiaries' }
+  { 
+    id: 'firstcouncilmeeting', 
+    title: 'First Council Meeting', 
+    category: 'meetings', 
+    description: 'We proudly marked a historic milestone with the First Council Meeting of Leo District 306 D7, held on 13th July 2025 at Skill Center, Mahanama College, Colombo 03. This pivotal gathering brought together the newly appointed district leadership, laying the foundation for a year of impactful service, unity, and innovation under the theme "Forge the Future." Here\'s to shaping a stronger, purpose-driven Leo movement together!', 
+    image: '/images/projects/firstcouncilmeeting/1.jpg', 
+    date: '2025-07-13', 
+    venue: 'Skill Center, Mahanama College, Colombo 03', 
+    impact: 'District leadership foundation established',
+    gallery: [
+      '/images/projects/firstcouncilmeeting/1.jpg',
+      '/images/projects/firstcouncilmeeting/2.jpg',
+      '/images/projects/firstcouncilmeeting/3.jpg',
+      '/images/projects/firstcouncilmeeting/4.jpg',
+      '/images/projects/firstcouncilmeeting/5.jpg',
+      '/images/projects/firstcouncilmeeting/6.jpg'
+    ]
+  },
+  { 
+    id: 'ashirwadapooja', 
+    title: 'ආශිර්වාද යාත්‍රා', 
+    category: 'religious', 
+    description: 'ආශිර්වාද යාත්‍රා — a special Multi-Religious Blessing Program organized by Leo District 306 D7 — was held on 13th July 2025. It was an inspiring moment of unity and peace, where diverse faiths came together to seek blessings and spiritual strength as we embark on a new chapter of service, leadership, and togetherness. May these blessings guide us with wisdom, compassion, and strength throughout the year ahead.', 
+    image: '/images/projects/ashirwadapooja/1.jpg', 
+    date: '2025-07-13', 
+    venue: 'Multi-Religious Venue', 
+    impact: 'Unity and spiritual strength for the district',
+    gallery: [
+      '/images/projects/ashirwadapooja/1.jpg',
+      '/images/projects/ashirwadapooja/2.jpg',
+      '/images/projects/ashirwadapooja/3.jpg',
+      '/images/projects/ashirwadapooja/4.jpg',
+      '/images/projects/ashirwadapooja/5.jpg',
+      '/images/projects/ashirwadapooja/6.jpg',
+      '/images/projects/ashirwadapooja/7.jpg',
+      '/images/projects/ashirwadapooja/8.jpg'
+    ]
+  },
+  { 
+    id: 'pirith', 
+    title: 'සර්වරාත්‍රික පිරිත් සජ්ඣායනාමය පිංකම', 
+    category: 'religious', 
+    description: 'අප්පමාදො අමත පදං- පමාදෝ මච්චුනෝ පදං අප්පමත්ථාන මියංති- යේ පමත්ථා යථා මතා. ලියෝවරුන් වන අප, ආධ්‍යාත්මික කටයුතු වල නියැලීම ද ඉතා වැදගත් ලෙස දක්වමින්, ලියෝ දිස්ත්‍රික්ක 306 D7 නව ලියෝ වර්ෂයට සහ ලියෝ දිස්ත්‍රික්කයට ආශිර්වාද පතා සිදු කරනු ලබන, සර්වරාත්‍රික පිරිත් සජ්ඣායනාමය පිංකම', 
+    image: '/images/projects/pirith/1.jpg', 
+    date: '2025-07-13', 
+    venue: 'Buddhist Temple', 
+    impact: 'Spiritual blessings for the new Leo year',
+    gallery: [
+      '/images/projects/pirith/1.jpg',
+      '/images/projects/pirith/2.jpg',
+      '/images/projects/pirith/3.jpg',
+      '/images/projects/pirith/4.jpg',
+      '/images/projects/pirith/5.jpg',
+      '/images/projects/pirith/6.jpg',
+      '/images/projects/pirith/7.jpg',
+      '/images/projects/pirith/8.jpg'
+    ]
+  }
 ];
 
 const categories = [
   { key: 'all', label: 'All' },
+  { key: 'meetings', label: 'Meetings' },
+  { key: 'religious', label: 'Religious' },
   { key: 'service', label: 'Service' },
   { key: 'environment', label: 'Environment' },
   { key: 'youth', label: 'Youth' },
@@ -23,18 +90,47 @@ type CatKey = typeof categories[number]['key'];
 export default function ProjectsPage() {
   const [active, setActive] = useState<CatKey>('all');
   const [open, setOpen] = useState<Project | null>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const projects = useMemo(() => (
     active === 'all' ? allProjects : allProjects.filter(p => p.category === active)
   ), [active]);
 
+  const nextImage = () => {
+    if (open) {
+      setCurrentImageIndex((prev) => (prev + 1) % open.gallery.length);
+    }
+  };
+
+  const prevImage = () => {
+    if (open) {
+      setCurrentImageIndex((prev) => (prev - 1 + open.gallery.length) % open.gallery.length);
+    }
+  };
+
+  const openProject = (project: Project) => {
+    setOpen(project);
+    setCurrentImageIndex(0);
+  };
+
   return (
     <div className="space-y-6">
-      <h1 className="heading-serif text-3xl font-bold">Projects</h1>
+      <div className="text-center space-y-2">
+        <h1 className="heading-serif text-3xl font-bold">Projects</h1>
+        <p className="text-lg opacity-80">Forge the Future - Leo District 306 D7</p>
+      </div>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 justify-center">
         {categories.map((c) => (
-          <button key={c.key} onClick={() => setActive(c.key)} className={`px-4 py-2 rounded-lg border ${active===c.key? 'bg-gold text-black border-gold' : 'border-white/20 hover:bg-white/10'}`}>
+          <button 
+            key={c.key} 
+            onClick={() => setActive(c.key)} 
+            className={`px-4 py-2 rounded-lg border transition-all ${
+              active === c.key 
+                ? 'bg-gold text-black border-gold shadow-lg' 
+                : 'border-white/20 hover:bg-white/10 hover:border-white/40'
+            }`}
+          >
             {c.label}
           </button>
         ))}
@@ -43,34 +139,160 @@ export default function ProjectsPage() {
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         <AnimatePresence>
           {projects.map((p) => (
-            <motion.div key={p.id} layout initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="glass rounded-xl overflow-hidden">
-              <img src={p.image} alt={p.title} className="h-44 w-full object-cover" />
+            <motion.div 
+              key={p.id} 
+              layout 
+              initial={{ opacity: 0, scale: 0.96 }} 
+              animate={{ opacity: 1, scale: 1 }} 
+              exit={{ opacity: 0 }} 
+              className="glass rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300"
+            >
+              <div className="relative overflow-hidden">
+                <img 
+                  src={p.image} 
+                  alt={p.title} 
+                  className="h-44 w-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
               <div className="p-4">
-                <div className="font-semibold">{p.title}</div>
-                <div className="text-sm opacity-70">{p.description}</div>
-                <button onClick={() => setOpen(p)} className="mt-3 px-3 py-1 rounded-md bg-maroon text-white hover:bg-maroon-700">Read More</button>
+                <div className="font-semibold text-lg mb-2">{p.title}</div>
+                <div className="text-sm opacity-70 mb-2 line-clamp-2">
+                  {p.description.length > 100 ? `${p.description.substring(0, 100)}...` : p.description}
+                </div>
+                <div className="text-xs opacity-60 mb-3">
+                  {new Date(p.date).toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </div>
+                <button 
+                  onClick={() => openProject(p)} 
+                  className="w-full px-3 py-2 rounded-md bg-maroon text-white hover:bg-maroon/80 transition-colors"
+                >
+                  View Details & Gallery
+                </button>
               </div>
             </motion.div>
           ))}
         </AnimatePresence>
       </div>
 
-      {/* Modal */}
+      {/* Enhanced Modal with Gallery */}
       <AnimatePresence>
         {open && (
-          <motion.div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setOpen(null)}>
-            <motion.div initial={{ y: 20 }} animate={{ y: 0 }} exit={{ y: 10 }} onClick={(e) => e.stopPropagation()} className="glass rounded-2xl max-w-xl w-full overflow-hidden">
-              <img src={open.image} alt={open.title} className="h-48 w-full object-cover" />
-              <div className="p-5">
-                <h3 className="text-xl font-semibold">{open.title}</h3>
-                <div className="mt-2 text-sm opacity-80">{open.description}</div>
-                <div className="mt-3 grid grid-cols-2 gap-3 text-sm">
-                  <div><span className="opacity-70">Date: </span>{open.date}</div>
-                  <div><span className="opacity-70">Venue: </span>{open.venue}</div>
-                  <div className="col-span-2"><span className="opacity-70">Impact: </span>{open.impact}</div>
+          <motion.div 
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4" 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            onClick={() => setOpen(null)}
+          >
+            <motion.div 
+              initial={{ y: 20, scale: 0.95 }} 
+              animate={{ y: 0, scale: 1 }} 
+              exit={{ y: 10, scale: 0.95 }} 
+              onClick={(e) => e.stopPropagation()} 
+              className="glass rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            >
+              {/* Header */}
+              <div className="flex justify-between items-start p-6 border-b border-white/10">
+                <div>
+                  <h3 className="text-2xl font-bold heading-serif">{open.title}</h3>
+                  <p className="text-sm opacity-70 mt-1">
+                    {new Date(open.date).toLocaleDateString('en-US', { 
+                      year: 'numeric', 
+                      month: 'long', 
+                      day: 'numeric' 
+                    })}
+                  </p>
                 </div>
-                <div className="mt-4 flex justify-end">
-                  <button onClick={() => setOpen(null)} className="px-4 py-2 rounded-lg bg-gold text-black">Close</button>
+                <button 
+                  onClick={() => setOpen(null)} 
+                  className="p-2 rounded-full glass hover:bg-white/20 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="p-6 space-y-6">
+                {/* Gallery */}
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-lg">Project Gallery</h4>
+                  <div className="relative">
+                    <div className="aspect-video rounded-lg overflow-hidden bg-black/5">
+                      <img
+                        src={open.gallery[currentImageIndex]}
+                        alt={`${open.title} - Image ${currentImageIndex + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    
+                    {/* Gallery Navigation */}
+                    {open.gallery.length > 1 && (
+                      <>
+                        <button
+                          onClick={prevImage}
+                          className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                          </svg>
+                        </button>
+                        
+                        <button
+                          onClick={nextImage}
+                          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                        >
+                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </button>
+
+                        <div className="flex justify-center mt-3 gap-2">
+                          {open.gallery.map((_, index) => (
+                            <button
+                              key={index}
+                              onClick={() => setCurrentImageIndex(index)}
+                              className={`w-2 h-2 rounded-full transition-colors ${
+                                index === currentImageIndex ? 'bg-white' : 'bg-white/40'
+                              }`}
+                            />
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Project Details */}
+                <div className="space-y-4">
+                  <h4 className="font-semibold text-lg">About This Project</h4>
+                  <p className="opacity-90 leading-relaxed">{open.description}</p>
+                  
+                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                    <div className="glass rounded-lg p-3">
+                      <span className="opacity-70">Date: </span>
+                      <span className="font-medium">
+                        {new Date(open.date).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'long', 
+                          day: 'numeric' 
+                        })}
+                      </span>
+                    </div>
+                    <div className="glass rounded-lg p-3">
+                      <span className="opacity-70">Venue: </span>
+                      <span className="font-medium">{open.venue}</span>
+                    </div>
+                    <div className="glass rounded-lg p-3 md:col-span-2">
+                      <span className="opacity-70">Impact: </span>
+                      <span className="font-medium">{open.impact}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </motion.div>

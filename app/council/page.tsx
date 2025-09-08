@@ -32,7 +32,7 @@ const sections: Section[] = [
       { 
         role: 'District Governor', 
         name: 'Lion Gaya Upasena PMJF PMAF', 
-        photo: photo('gaya.jpg'),
+        photo: photo('gaya.jpeg'),
         biography: 'Lion Gaya Upasena PMJF PMAF serves as the District Governor of Lions District 306 D7, bringing decades of distinguished service to the Lions organization. As a Progressive Melvin Jones Fellow (PMJF) and Progressive Member of the Academy of Fellows (PMAF), he has demonstrated exceptional leadership and commitment to humanitarian service. His tenure is marked by innovative approaches to community development, youth empowerment, and sustainable service projects across the district.',
         gallery: ['/images/council/gaya.jpeg', '/logos/lion.png', '/logos/dp.png']
       },
