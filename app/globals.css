@@ -53,7 +53,14 @@ body {
 }
 
 /* marquee-like horizontal scroll for logo strip */
-@keyframes scroll {
+@keyframes marquee-x {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  100% { transform: translateX(-100%); }
+}
+.marquee-track {
+  animation: marquee-x 20s linear infinite;
+}
+.marquee-track2 {
+  animation: marquee-x 20s linear infinite;
+  animation-delay: -10s; /* half duration for perfect staggering */
 }

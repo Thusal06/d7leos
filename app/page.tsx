@@ -50,13 +50,20 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Seamless looping carousel of partner logos */}
+      {/* Seamless looping carousel of partner logos (dual tracks to avoid gap) */}
       <div className="glass rounded-2xl p-4 overflow-hidden">
         <div className="relative w-full" style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}>
-          <div className="flex gap-14 w-[200%] animate-[scroll_20s_linear_infinite] hover:[animation-play-state:paused]">
-            {[...partnerLogos, ...partnerLogos].map((logo, idx) => (
-              <img key={logo.alt+idx} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
-            ))}
+          <div className="flex gap-14 whitespace-nowrap">
+            <div className="flex gap-14 marquee-track hover:[animation-play-state:paused]">
+              {partnerLogos.map((logo) => (
+                <img key={`a-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
+              ))}
+            </div>
+            <div className="flex gap-14 marquee-track2 hover:[animation-play-state:paused]">
+              {partnerLogos.map((logo) => (
+                <img key={`b-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
+              ))}
+            </div>
           </div>
         </div>
       </div>
