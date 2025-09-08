@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link';
-import { IOSToggle } from './ios-toggle';
+import { ThemeToggleButton } from './theme-toggle';
 import { useState } from 'react';
 
 export function Navbar() {
@@ -24,7 +24,7 @@ export function Navbar() {
           </Link>
           <div className="hidden md:flex items-center gap-5 text-sm">
             <NavLinks />
-            <IOSToggle />
+            <ThemeToggleButton />
           </div>
           <button aria-label="Menu" className="md:hidden p-2 rounded border border-white/20" onClick={()=>setOpen(v=>!v)}>
             <span className="block w-5 h-0.5 bg-current mb-1" />
@@ -35,7 +35,7 @@ export function Navbar() {
         {open && (
           <div className="md:hidden mt-3 flex flex-col gap-3 text-sm">
             <NavLinks />
-            <div className="pt-2"><IOSToggle /></div>
+            <div className="pt-2"><ThemeToggleButton /></div>
           </div>
         )}
       </div>

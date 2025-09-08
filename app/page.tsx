@@ -8,6 +8,7 @@ const partnerLogos = [
   { src: '/logos/leo.png', alt: 'LEO' },
   { src: '/logos/lion.png', alt: 'Lions' },
   { src: '/logos/mdp.png', alt: 'Multiple District' },
+  { src: '/logos/srilanka.png', alt: 'Sri Lanka and Maldives' },
 ];
 
 const slides = [

@@ -6,12 +6,13 @@ interface ThemeContextProps {
   toggle: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextProps>({ theme: 'light', toggle: () => {} });
+// Default to dark for better initial UX
+const ThemeContext = createContext<ThemeContextProps>({ theme: 'dark', toggle: () => {} });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
-    if (typeof window === 'undefined') return 'light';
-    return (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
+    if (typeof window === 'undefined') return 'dark';
+    return (localStorage.getItem('theme') as 'light' | 'dark') || 'dark';
   });
 
   useEffect(() => {

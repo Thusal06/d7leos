@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </>
         )}
       </head>
-      <body className="min-h-screen flex flex-col" data-theme="system">
+      <body className="min-h-screen flex flex-col dark" data-theme="dark">
         <ThemeProvider>
           <Navbar />
           <main className="flex-1 container mx-auto px-4 py-8">{children}</main>
