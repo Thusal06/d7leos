@@ -132,12 +132,12 @@ export default function CouncilPage() {
                 className="glass rounded-xl overflow-hidden group w-full max-w-xs"
                 whileHover={{ y: -6 }}
               >
-                {/* Fixed square image wrapper (centered) */}
-                <div className="mx-auto w-40 h-40 sm:w-44 sm:h-44 md:w-48 md:h-48 overflow-hidden bg-black/5 rounded-t-xl flex items-center justify-center">
+                {/* Square image wrapper */}
+                <div className="relative w-full aspect-square overflow-hidden bg-black/5">
                   <img
                     src={m.photo || '/logos/lion.png'}
                     alt={m.name}
-                    className="max-w-full max-h-full object-contain p-1"
+                    className="absolute inset-0 h-full w-full object-cover object-center"
                     loading="lazy"
                   />
                 </div>
