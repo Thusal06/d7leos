@@ -1,0 +1,8 @@
+lib
+index.js
+src/dataconnect-generated
+src/dataconnect-generated/**
+src/dataconnect-generated/esm
+src/dataconnect-generated/esm/**
+src/dataconnect-generated/index.cjs.js
+src/dataconnect-generated/index.d.ts
