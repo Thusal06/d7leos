@@ -125,11 +125,11 @@ export default function CouncilPage() {
       {sections.map((section) => (
         <section key={section.title} className="space-y-5">
           <h2 className="heading-serif text-2xl font-semibold">{section.title}</h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 justify-items-center">
+          <div className="flex flex-wrap justify-center gap-5">
             {section.items.map((m, idx) => (
               <motion.div
                 key={`${section.title}-${idx}-${m.name}`}
-                className="glass rounded-xl overflow-hidden group w-full max-w-xs"
+                className="glass rounded-xl overflow-hidden group w-full sm:w-64"
                 whileHover={{ y: -6 }}
               >
                 {/* Square image wrapper */}
