@@ -34,8 +34,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </Script>
           </>
         )}
+      <Script id="theme-init" strategy="beforeInteractive">
+        {`
+          try {
+            var t = localStorage.getItem('theme');
+            if (!t || t === 'dark') {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+          } catch (e) {}
+        `}
+      </Script>
       </head>
-      <body className="min-h-screen flex flex-col dark" data-theme="dark">
+      <body className="min-h-screen flex flex-col">
         <ThemeProvider>
           <Navbar />
           <main className="flex-1 container mx-auto px-4 py-8">{children}</main>

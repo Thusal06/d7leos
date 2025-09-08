@@ -13,23 +13,29 @@ export function ThemeToggleButton() {
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       className="relative inline-flex items-center justify-center h-9 w-9 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 transition"
     >
-      {/* Sun icon for light mode, visible when theme is light */}
+      {/* Sun (outline) - from Heroicons */}
       <svg
-        className={`h-5 w-5 text-yellow-500 ${isDark ? 'hidden' : 'block'}`}
+        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill="currentColor"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className={`h-5 w-5 text-yellow-600 ${isDark ? 'hidden' : 'block'}`}
         aria-hidden="true"
       >
-        <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.48 0l1.79-1.79 1.41 1.41-1.79 1.8-1.41-1.42zM12 4V1h-0v3h0zm0 19v-3h-0v3h0zM4 12H1v0h3v0zm19 0h-3v0h3v0zM6.76 19.16l-1.79 1.79 1.41 1.41 1.8-1.79-1.42-1.41zm10.48 0l1.42 1.41 1.79-1.79-1.41-1.41-1.8 1.79zM12 8a4 4 0 100 8 4 4 0 000-8z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2m0 14v2m7.071-14.071l-1.414 1.414M6.343 17.657l-1.414 1.414M21 12h-2M5 12H3m14.657 6.657l-1.414-1.414M7.757 7.757L6.343 6.343M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
       </svg>
-      {/* Moon icon for dark mode, visible when theme is dark */}
+      {/* Moon (outline) - from Heroicons */}
       <svg
-        className={`h-5 w-5 text-yellow-300 ${isDark ? 'block' : 'hidden'}`}
+        xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        fill="currentColor"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        className={`h-5 w-5 text-yellow-300 ${isDark ? 'block' : 'hidden'}`}
         aria-hidden="true"
       >
-        <path d="M21.75 15.5A9.75 9.75 0 1110.5 2.25c.2 0 .4 0 .6.02a.75.75 0 01.23 1.45A7.5 7.5 0 1019.78 13.67a.75.75 0 011.45-.23c.02.2.02.4.02.6z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3c.2 0 .39.01.58.03A7 7 0 1021 12.79z" />
       </svg>
     </button>
   );
