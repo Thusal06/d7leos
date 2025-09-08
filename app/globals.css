@@ -58,9 +58,9 @@ body {
   100% { transform: translateX(-100%); }
 }
 .marquee-track {
-  animation: marquee-x 20s linear infinite;
+  animation: marquee-x 25s linear infinite;
 }
 .marquee-track2 {
-  animation: marquee-x 20s linear infinite;
-  animation-delay: -10s; /* half duration for perfect staggering */
+  animation: marquee-x 25s linear infinite;
+  animation-delay: -12.5s; /* half duration for perfect staggering */
 }

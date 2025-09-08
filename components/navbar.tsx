@@ -26,16 +26,18 @@ export function Navbar() {
             <NavLinks />
             <ThemeToggleButton />
           </div>
-          <button aria-label="Menu" className="md:hidden p-2 rounded border border-white/20" onClick={()=>setOpen(v=>!v)}>
-            <span className="block w-5 h-0.5 bg-current mb-1" />
-            <span className="block w-5 h-0.5 bg-current mb-1" />
-            <span className="block w-5 h-0.5 bg-current" />
-          </button>
+          <div className="md:hidden flex items-center gap-3">
+            <ThemeToggleButton />
+            <button aria-label="Menu" className="p-2 rounded border border-white/20" onClick={()=>setOpen(v=>!v)}>
+              <span className="block w-5 h-0.5 bg-current mb-1" />
+              <span className="block w-5 h-0.5 bg-current mb-1" />
+              <span className="block w-5 h-0.5 bg-current" />
+            </button>
+          </div>
         </div>
         {open && (
           <div className="md:hidden mt-3 flex flex-col gap-3 text-sm">
             <NavLinks />
-            <div className="pt-2"><ThemeToggleButton /></div>
           </div>
         )}
       </div>

@@ -53,15 +53,15 @@ export default function HomePage() {
       {/* Seamless looping carousel of partner logos (dual tracks to avoid gap) */}
       <div className="glass rounded-2xl p-4 overflow-hidden">
         <div className="relative w-full" style={{ maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)' }}>
-          <div className="flex gap-14 whitespace-nowrap">
-            <div className="flex gap-14 marquee-track hover:[animation-play-state:paused]">
+          <div className="flex gap-20 whitespace-nowrap">
+            <div className="flex gap-20 marquee-track hover:[animation-play-state:paused]">
               {partnerLogos.map((logo) => (
-                <img key={`a-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
+                <img key={`a-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition flex-shrink-0" />
               ))}
             </div>
-            <div className="flex gap-14 marquee-track2 hover:[animation-play-state:paused]">
+            <div className="flex gap-20 marquee-track2 hover:[animation-play-state:paused]">
               {partnerLogos.map((logo) => (
-                <img key={`b-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition" />
+                <img key={`b-${logo.alt}`} src={logo.src} alt={logo.alt} className="h-14 md:h-16 w-auto opacity-95 hover:opacity-100 transition flex-shrink-0" />
               ))}
             </div>
           </div>
