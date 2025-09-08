@@ -118,9 +118,9 @@ function NewsletterCard() {
     <div className="glass rounded-2xl p-6">
       <h3 className="heading-serif text-2xl font-semibold">Stay Updated</h3>
       <p className="opacity-80 text-sm mt-1">Subscribe to our newsletter for district updates and opportunities.</p>
-      <form onSubmit={submit} className="mt-4 flex gap-2">
-        <input value={email} onChange={(e) => setEmail(e.target.value)} required type="email" placeholder="you@example.com" className="flex-1 px-4 py-2 rounded-lg bg-white/70 dark:bg-white/10 border border-white/30 outline-none focus:ring-2 focus:ring-gold" />
-        <button disabled={status==='loading'} className="px-4 py-2 rounded-lg bg-maroon text-white hover:bg-maroon-700 disabled:opacity-60">Subscribe</button>
+      <form onSubmit={submit} className="mt-4 flex flex-col sm:flex-row gap-2">
+        <input value={email} onChange={(e) => setEmail(e.target.value)} required type="email" placeholder="you@example.com" className="w-full sm:flex-1 px-4 py-2 rounded-lg bg-white/70 dark:bg-white/10 border border-white/30 outline-none focus:ring-2 focus:ring-gold" />
+        <button disabled={status==='loading'} className="w-full sm:w-auto px-4 py-2 rounded-lg bg-maroon text-white hover:bg-maroon-700 disabled:opacity-60">Subscribe</button>
       </form>
       {status === 'done' && <p className="text-green-500 mt-2">Subscribed!</p>}
       {status === 'error' && <p className="text-red-500 mt-2">Error. Try again.</p>}
