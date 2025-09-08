@@ -91,6 +91,8 @@ export default function ProjectsPage() {
   const [active, setActive] = useState<CatKey>('all');
   const [open, setOpen] = useState<Project | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [hoverImageIndex, setHoverImageIndex] = useState<{ [key: string]: number }>({});
 
   const projects = useMemo(() => (
     active === 'all' ? allProjects : allProjects.filter(p => p.category === active)
@@ -111,6 +113,37 @@ export default function ProjectsPage() {
   const openProject = (project: Project) => {
     setOpen(project);
     setCurrentImageIndex(0);
+  };
+
+  // Auto-slide functionality for hover
+  const handleMouseEnter = (projectId: string) => {
+    setHoveredProject(projectId);
+    const project = allProjects.find(p => p.id === projectId);
+    if (project && project.gallery.length > 1) {
+      const interval = setInterval(() => {
+        setHoverImageIndex(prev => ({
+          ...prev,
+          [projectId]: ((prev[projectId] || 0) + 1) % project.gallery.length
+        }));
+      }, 1500); // Change image every 1.5 seconds
+      
+      // Store interval ID for cleanup
+      (window as any)[`interval_${projectId}`] = interval;
+    }
+  };
+
+  const handleMouseLeave = (projectId: string) => {
+    setHoveredProject(null);
+    // Clear the interval
+    if ((window as any)[`interval_${projectId}`]) {
+      clearInterval((window as any)[`interval_${projectId}`]);
+      delete (window as any)[`interval_${projectId}`];
+    }
+    // Reset to first image
+    setHoverImageIndex(prev => ({
+      ...prev,
+      [projectId]: 0
+    }));
   };
 
   return (
@@ -136,7 +169,7 @@ export default function ProjectsPage() {
         ))}
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
         <AnimatePresence>
           {projects.map((p) => (
             <motion.div 
@@ -146,19 +179,46 @@ export default function ProjectsPage() {
               animate={{ opacity: 1, scale: 1 }} 
               exit={{ opacity: 0 }} 
               className="glass rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300"
+              onMouseEnter={() => handleMouseEnter(p.id)}
+              onMouseLeave={() => handleMouseLeave(p.id)}
             >
               <div className="relative overflow-hidden">
                 <img 
-                  src={p.image} 
+                  src={hoveredProject === p.id && p.gallery.length > 1 
+                    ? p.gallery[hoverImageIndex[p.id] || 0] 
+                    : p.image
+                  } 
                   alt={p.title} 
-                  className="h-44 w-full object-cover group-hover:scale-105 transition-transform duration-300" 
+                  className="h-56 sm:h-48 md:h-52 lg:h-56 w-full object-cover group-hover:scale-105 transition-all duration-500" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Image counter for galleries with multiple images */}
+                {p.gallery.length > 1 && (
+                  <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    {hoveredProject === p.id ? (hoverImageIndex[p.id] || 0) + 1 : 1} / {p.gallery.length}
+                  </div>
+                )}
+
+                {/* Auto-slide indicator dots */}
+                {p.gallery.length > 1 && hoveredProject === p.id && (
+                  <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex gap-1">
+                    {p.gallery.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                          index === (hoverImageIndex[p.id] || 0) ? 'bg-white' : 'bg-white/40'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="p-4">
-                <div className="font-semibold text-lg mb-2">{p.title}</div>
-                <div className="text-sm opacity-70 mb-2 line-clamp-2">
-                  {p.description.length > 100 ? `${p.description.substring(0, 100)}...` : p.description}
+              
+              <div className="p-3 sm:p-4">
+                <div className="font-semibold text-base sm:text-lg mb-2 line-clamp-2">{p.title}</div>
+                <div className="text-xs sm:text-sm opacity-70 mb-3 line-clamp-2">
+                  {p.description.length > 80 ? `${p.description.substring(0, 80)}...` : p.description}
                 </div>
                 <div className="text-xs opacity-60 mb-3">
                   {new Date(p.date).toLocaleDateString('en-US', { 
@@ -169,7 +229,7 @@ export default function ProjectsPage() {
                 </div>
                 <button 
                   onClick={() => openProject(p)} 
-                  className="w-full px-3 py-2 rounded-md bg-maroon text-white hover:bg-maroon/80 transition-colors"
+                  className="w-full px-3 py-2 text-sm rounded-md bg-maroon text-white hover:bg-maroon/80 transition-colors"
                 >
                   View Details & Gallery
                 </button>
@@ -194,13 +254,13 @@ export default function ProjectsPage() {
               animate={{ y: 0, scale: 1 }} 
               exit={{ y: 10, scale: 0.95 }} 
               onClick={(e) => e.stopPropagation()} 
-              className="glass rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+              className="glass rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-2 sm:mx-4"
             >
               {/* Header */}
-              <div className="flex justify-between items-start p-6 border-b border-white/10">
-                <div>
-                  <h3 className="text-2xl font-bold heading-serif">{open.title}</h3>
-                  <p className="text-sm opacity-70 mt-1">
+              <div className="flex justify-between items-start p-4 sm:p-6 border-b border-white/10">
+                <div className="flex-1 pr-4">
+                  <h3 className="text-xl sm:text-2xl font-bold heading-serif line-clamp-2">{open.title}</h3>
+                  <p className="text-xs sm:text-sm opacity-70 mt-1">
                     {new Date(open.date).toLocaleDateString('en-US', { 
                       year: 'numeric', 
                       month: 'long', 
@@ -210,18 +270,18 @@ export default function ProjectsPage() {
                 </div>
                 <button 
                   onClick={() => setOpen(null)} 
-                  className="p-2 rounded-full glass hover:bg-white/20 transition-colors"
+                  className="p-2 rounded-full glass hover:bg-white/20 transition-colors flex-shrink-0"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
 
-              <div className="p-6 space-y-6">
+              <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
                 {/* Gallery */}
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-lg">Project Gallery</h4>
+                <div className="space-y-3 sm:space-y-4">
+                  <h4 className="font-semibold text-base sm:text-lg">Project Gallery</h4>
                   <div className="relative">
                     <div className="aspect-video rounded-lg overflow-hidden bg-black/5">
                       <img
@@ -236,23 +296,28 @@ export default function ProjectsPage() {
                       <>
                         <button
                           onClick={prevImage}
-                          className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                          className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                           </svg>
                         </button>
                         
                         <button
                           onClick={nextImage}
-                          className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
+                          className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 p-1.5 sm:p-2 rounded-full bg-black/50 text-white hover:bg-black/70 transition-colors"
                         >
-                          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                           </svg>
                         </button>
 
-                        <div className="flex justify-center mt-3 gap-2">
+                        {/* Image counter */}
+                        <div className="absolute top-2 right-2 bg-black/50 text-white text-xs px-2 py-1 rounded-full">
+                          {currentImageIndex + 1} / {open.gallery.length}
+                        </div>
+
+                        <div className="flex justify-center mt-3 gap-1.5 sm:gap-2">
                           {open.gallery.map((_, index) => (
                             <button
                               key={index}
@@ -269,11 +334,11 @@ export default function ProjectsPage() {
                 </div>
 
                 {/* Project Details */}
-                <div className="space-y-4">
-                  <h4 className="font-semibold text-lg">About This Project</h4>
-                  <p className="opacity-90 leading-relaxed">{open.description}</p>
+                <div className="space-y-3 sm:space-y-4">
+                  <h4 className="font-semibold text-base sm:text-lg">About This Project</h4>
+                  <p className="opacity-90 leading-relaxed text-sm sm:text-base">{open.description}</p>
                   
-                  <div className="grid md:grid-cols-2 gap-4 text-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                     <div className="glass rounded-lg p-3">
                       <span className="opacity-70">Date: </span>
                       <span className="font-medium">
@@ -287,10 +352,6 @@ export default function ProjectsPage() {
                     <div className="glass rounded-lg p-3">
                       <span className="opacity-70">Venue: </span>
                       <span className="font-medium">{open.venue}</span>
-                    </div>
-                    <div className="glass rounded-lg p-3 md:col-span-2">
-                      <span className="opacity-70">Impact: </span>
-                      <span className="font-medium">{open.impact}</span>
                     </div>
                   </div>
                 </div>
