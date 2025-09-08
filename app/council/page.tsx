@@ -11,9 +11,19 @@ interface Section {
   items: SectionItem[];
 }
 
-const photo = (file: string | undefined) => file ? `/images/council/${file}` : '/logos/lion.png';
+const photo = (file: string | undefined) => (file ? `/images/council/${file}` : '/logos/lion.png');
 
 const sections: Section[] = [
+  // New top section with placeholders for Lions District 306 D7
+  {
+    title: 'Lions District 306 D7',
+    items: [
+      { role: 'District Governor', name: 'To be announced', photo: photo(undefined) },
+      { role: 'Immediate Past District Governor', name: 'To be announced', photo: photo(undefined) },
+      { role: 'First Vice District Governor', name: 'To be announced', photo: photo(undefined) },
+      { role: 'Second Vice District Governor', name: 'To be announced', photo: photo(undefined) },
+    ],
+  },
   {
     title: 'District Executives',
     items: [
@@ -26,39 +36,40 @@ const sections: Section[] = [
       { role: 'District Contest Director', name: 'Leo Lion Sunera Naveed', photo: photo('naveed.jpg') },
       { role: 'District Additional Secretary / Membership Chairperson', name: 'Leo Indeera Weerasinghe', photo: photo('indeera.JPG') },
       { role: 'District Additional Treasurer', name: 'Leo Minasha Katugampola', photo: photo('minasha.jpg') },
-      { role: 'District Assistant Secretary', name: 'Leo Imesha Yohani', photo: photo('yohani.jpg') },
+      { role: 'District Assistant Secretary', name: 'Leo Lion Yohani Gunathilaka', photo: photo('yohani.jpg') },
       { role: 'District Assistant Treasurer', name: 'Leo Manthila Liyanage', photo: photo('manthila.jpg') },
       { role: 'Leo Lion Liason Officer', name: 'Leo Lion Thavisha Bandara', photo: photo('thavisha.jpeg') },
-      { role: 'District Director - Membership Development & Retention', name: 'Leo Lion Manthila Gamage', photo: photo('manthilagamage.JPG') },
-      { role: 'District Director - Operations', name: 'Leo Lion Poorna Panduwawala', photo: photo('poorna.jpeg') },
-      { role: 'District Director - Leadership & Professional Development', name: 'Leo Gevindu Kodikara', photo: photo('gevindu.jpeg') },
-      { role: 'District Director - Creative Operations', name: 'Leo Inod Perera', photo: photo('inod.jpeg') },
-      { role: 'District Director - Special Programs', name: 'Leo Lion Didula Fonseka', photo: photo(undefined) },
+      // Updated director assignments and titles per request
+      { role: 'District Director - Special Programs', name: 'Leo Lion Manthila Gamage', photo: photo('manthilagamage.JPG') },
+      { role: 'District Director - Education and Career Guidance', name: 'Leo Lion Poorna Panduwawala', photo: photo('poorna.jpeg') },
+      { role: 'District Director - Operations', name: 'Leo Gevindu Kodikara', photo: photo('gevindu.jpeg') },
+      { role: 'District Director - Leadership & Professional Development', name: 'Leo Inod Perera', photo: photo('inod.jpeg') },
+      { role: 'District Director - Creative Operations', name: 'Leo Lion Didula Fonseka', photo: photo(undefined) },
     ],
   },
   {
     title: 'Region Directors',
     items: [
       { role: 'Region Chairperson (Region 1)', name: 'Leo Nimsara Manith', photo: photo('nimsara.jpg') },
-      { role: 'Region Chairperson (Region 2)', name: 'Leo Gaveen Nayanjith', photo: photo('gaveennayanajith.jpg') },
+      { role: 'Region Chairperson (Region 2)', name: 'Leo Lion Gaveen Nayanjith', photo: photo('gaveennayanajith.jpg') },
       { role: 'Region Chairperson (Region 3)', name: 'Leo Thisaruni Wijebandara', photo: photo('thisarani.jpeg') },
-      { role: 'Region Chairperson (Region 4)', name: 'Leo Ravinya Dimuth', photo: photo('ravinya.jpeg') },
-      { role: 'Region Chairperson (Region 5)', name: 'Leo Lion Muthula Liyanage', photo: photo('muthula.jpg') },
+      { role: 'Region Chairperson (Region 5)', name: 'Leo Ravinya Dimuth', photo: photo('ravinya.jpeg') },
+      { role: 'Region Chairperson (Region 4)', name: 'Leo Muthula Liyanage', photo: photo('muthula.jpg') },
     ],
   },
   {
-    title: 'Zone Directors',
+    title: 'Zone Chairpersons',
     items: [
-      { role: 'Zone Director', name: 'Leo Gaveen Perera', photo: photo('gaveen.jpg') },
-      { role: 'Zone Director', name: 'Leo Lithira Ramuditha', photo: photo('lithira.jpg') },
-      { role: 'Zone Director', name: 'Leo Rehan Thulnaka', photo: photo('rehan.webp') },
-      { role: 'Zone Director', name: 'Leo Lehara Silva', photo: photo('lehara.jpg') },
-      { role: 'Zone Director', name: 'Leo Vihas Santhula', photo: photo(undefined) },
-      { role: 'Zone Director', name: 'Leo Udula Satharasinghe', photo: photo('udula.jpg') },
-      { role: 'Zone Director', name: 'Leo Pamudi Anuththara', photo: photo('pamudi.jpg') },
-      { role: 'Zone Director', name: 'Leo Hasanka Lakshan', photo: photo(undefined) },
-      { role: 'Zone Director', name: 'Leo Navindu Jayawardane', photo: photo('navindu.png') },
-      { role: 'Zone Director', name: 'Leo Hiruna Rathnayaka', photo: photo('hiruna.jpg') },
+      { role: 'Zone Chairperson (Region 02 - Zone 01)', name: 'Leo Gaveen Perera', photo: photo('gaveen.jpg') },
+      { role: 'Zone Chairperson (Region 03 - Zone 01)', name: 'Leo Lithira Ramuditha', photo: photo('lithira.jpg') },
+      { role: 'Zone Chairperson (Region 02 - Zone 02)', name: 'Leo Rehan Thulnaka', photo: photo('rehan.webp') },
+      { role: 'Zone Chairperson (Region 03 - Zone 02)', name: 'Leo Lehara Silva', photo: photo('lehara.jpg') },
+      { role: 'Zone Chairperson (Region 04 - Zone 01)', name: 'Leo Vihas Santhula', photo: photo(undefined) },
+      { role: 'Zone Chairperson (Region 05 - Zone 01)', name: 'Leo Udula Satharasinghe', photo: photo('udula.jpg') },
+      { role: 'Zone Chairperson (Region 05 - Zone 02)', name: 'Leo Pamudi Anuththara', photo: photo('pamudi.jpg') },
+      { role: 'Zone Chairperson (Region 01 - Zone 02)', name: 'Leo Hasanka Lakshan', photo: photo(undefined) },
+      { role: 'Zone Chairperson (Region 04 - Zone 02)', name: 'Leo Navindu Jayawardane', photo: photo('navindu.png') },
+      { role: 'Zone Chairperson (Region 01 - Zone 01)', name: 'Leo Hiruna Rathnayaka', photo: photo('hiruna.jpg') },
     ],
   },
   {
