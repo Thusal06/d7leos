@@ -1,6 +1,30 @@
 'use client';
 import { motion } from 'framer-motion';
 
+// Leadership data from council page - District President to District Treasurer
+const leadershipData = [
+  { 
+    role: 'District President', 
+    name: 'Leo Lion Hansathi Imethma', 
+    photo: '/images/council/hansathi.jpg' 
+  },
+  { 
+    role: 'District Vice President', 
+    name: 'Leo Lion Senura Battage', 
+    photo: '/images/council/senura.jpeg' 
+  },
+  { 
+    role: 'District Secretary', 
+    name: 'Leo Lion Vihara Jayaweera', 
+    photo: '/images/council/vihara.png' 
+  },
+  { 
+    role: 'District Treasurer', 
+    name: 'Leo Lion Tehan Nakandala', 
+    photo: '/images/council/tehan.jpg' 
+  },
+];
+
 export default function AboutPage() {
   return (
     <div className="space-y-8">
@@ -23,12 +47,22 @@ export default function AboutPage() {
       <section className="glass rounded-2xl p-6">
         <h2 className="heading-serif text-2xl font-semibold">Leadership</h2>
         <div className="mt-4 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {[{name:'District President', role:'DG', img:'/images/leader1.jpg'}, {name:'Vice District President', role:'VDG', img:'/images/leader2.jpg'}].map((p) => (
-            <motion.div whileHover={{ y: -6 }} key={p.name} className="rounded-xl p-4 glass">
-              <img src={p.img} alt={p.name} className="w-full h-40 object-cover rounded-lg" />
-              <div className="mt-3">
-                <div className="font-semibold">{p.name}</div>
-                <div className="text-sm opacity-70">{p.role}</div>
+          {leadershipData.map((leader) => (
+            <motion.div 
+              whileHover={{ y: -6 }} 
+              key={leader.name} 
+              className="rounded-xl p-4 glass group"
+            >
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg bg-black/5">
+                <img 
+                  src={leader.photo || '/logos/lion.png'} 
+                  alt={leader.name} 
+                  className="absolute inset-0 h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-300" 
+                />
+              </div>
+              <div className="mt-3 text-center">
+                <div className="font-semibold text-sm">{leader.name}</div>
+                <div className="text-xs opacity-70 mt-1">{leader.role}</div>
               </div>
             </motion.div>
           ))}
