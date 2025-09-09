@@ -689,7 +689,7 @@ function CourseCard({ course, progress, onSelect }: {
           {course.title}
         </h3>
         
-        <p className="text-sm opacity-70 mb-4 line-clamp-2">
+        <p className="text-sm opacity-70 mb-4 overflow-hidden" style={{ display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
           {course.description}
         </p>
         
@@ -834,7 +834,7 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
   return (
     <div className="min-h-screen p-4">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <button
           onClick={onBack}
           className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 hover:bg-white/20 dark:hover:bg-white/15 transition-all"
@@ -842,11 +842,12 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          Back to Courses
+          <span className="hidden sm:inline">Back to Courses</span>
+          <span className="sm:hidden">Back</span>
         </button>
         
-        <div className="text-right">
-          <h1 className="heading-serif text-2xl font-bold">{course.title}</h1>
+        <div className="text-left sm:text-right">
+          <h1 className="heading-serif text-xl sm:text-2xl font-bold">{course.title}</h1>
           <p className="text-sm opacity-70">Module {currentModuleIndex + 1} of {course.modules.length}</p>
         </div>
       </div>
@@ -867,15 +868,15 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
 
       <div className="grid lg:grid-cols-4 gap-6">
         {/* Module Navigation */}
-        <div className="lg:col-span-1">
-          <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-6">
+        <div className="lg:col-span-1 order-2 lg:order-1">
+          <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-4 sm:p-6">
             <h3 className="font-semibold mb-4">Course Modules</h3>
             <div className="space-y-2">
               {course.modules.map((module, index) => (
                 <button
                   key={module.id}
                   onClick={() => setCurrentModuleIndex(index)}
-                  className={`w-full text-left p-3 rounded-lg transition-all ${
+                  className={`w-full text-left p-2 sm:p-3 rounded-lg transition-all ${
                     index === currentModuleIndex
                       ? 'bg-maroon text-white'
                       : userProgress?.completedModules.includes(module.id)
@@ -885,11 +886,11 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
                 >
                   <div className="flex items-center gap-2">
                     {userProgress?.completedModules.includes(module.id) && (
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     )}
-                    <span className="text-sm font-medium">{module.title}</span>
+                    <span className="text-xs sm:text-sm font-medium truncate">{module.title}</span>
                   </div>
                 </button>
               ))}
@@ -898,16 +899,16 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
         </div>
 
         {/* Module Content */}
-        <div className="lg:col-span-3">
-          <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-6">
-            <div className="flex items-center justify-between mb-6">
-              <div>
-                <h2 className="text-2xl font-bold mb-2">{currentModule.title}</h2>
-                <p className="opacity-70">{currentModule.description}</p>
+        <div className="lg:col-span-3 order-1 lg:order-2">
+          <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div className="flex-1">
+                <h2 className="text-xl sm:text-2xl font-bold mb-2">{currentModule.title}</h2>
+                <p className="opacity-70 text-sm sm:text-base">{currentModule.description}</p>
               </div>
               {isModuleCompleted && (
-                <div className="bg-green-500 text-white rounded-full p-2">
-                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                <div className="bg-green-500 text-white rounded-full p-2 flex-shrink-0 self-start sm:self-center">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
                 </div>
@@ -915,17 +916,17 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
             </div>
 
             {/* PDF Viewer */}
-            <div className="bg-white/5 rounded-lg p-8 text-center mb-6">
-              <div className="text-6xl mb-4">📄</div>
-              <h3 className="text-xl font-semibold mb-2">PDF Content</h3>
-              <p className="opacity-70 mb-4">
+            <div className="bg-white/5 rounded-lg p-4 sm:p-8 text-center mb-6">
+              <div className="text-4xl sm:text-6xl mb-4">📄</div>
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">PDF Content</h3>
+              <p className="opacity-70 mb-4 text-sm sm:text-base">
                 In a real implementation, this would display the PDF content using a PDF viewer library.
               </p>
               <a
                 href={currentModule.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-maroon text-white rounded-lg hover:bg-maroon/80 transition-all"
+                className="inline-flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-maroon text-white rounded-lg hover:bg-maroon/80 transition-all text-sm sm:text-base"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -935,11 +936,11 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
             </div>
 
             {/* Navigation */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
               <button
                 onClick={prevModule}
                 disabled={currentModuleIndex === 0}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -947,11 +948,11 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
                 Previous
               </button>
 
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 {!isModuleCompleted && (
                   <button
                     onClick={markModuleComplete}
-                    className="px-6 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-all"
+                    className="px-4 sm:px-6 py-2 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-all text-sm sm:text-base"
                   >
                     Mark Complete
                   </button>
@@ -960,7 +961,7 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
                 {!isLastModule ? (
                   <button
                     onClick={nextModule}
-                    className="flex items-center gap-2 px-4 py-2 rounded-lg bg-maroon text-white hover:bg-maroon/80 transition-all"
+                    className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-maroon text-white hover:bg-maroon/80 transition-all text-sm sm:text-base"
                   >
                     Next
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -971,7 +972,7 @@ function CourseViewer({ course, onBack, userProgress, onProgressUpdate }: {
                   userProgress?.completedModules.length === course.modules.length && (
                     <button
                       onClick={() => setShowSummary(true)}
-                      className="px-6 py-2 rounded-lg bg-gold text-black hover:bg-gold/80 transition-all font-semibold"
+                      className="px-4 sm:px-6 py-2 rounded-lg bg-gold text-black hover:bg-gold/80 transition-all font-semibold text-sm sm:text-base"
                     >
                       Course Summary
                     </button>
@@ -995,25 +996,25 @@ function CourseSummary({ course, userProgress, onStartQuiz, onBack }: {
   return (
     <div className="min-h-screen p-4">
       <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-8">
-          <div className="text-6xl mb-4">🎉</div>
-          <h1 className="heading-serif text-3xl font-bold mb-2">Congratulations!</h1>
-          <p className="text-lg opacity-70">You've completed all modules in {course.title}</p>
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="text-4xl sm:text-6xl mb-4">🎉</div>
+          <h1 className="heading-serif text-2xl sm:text-3xl font-bold mb-2">Congratulations!</h1>
+          <p className="text-base sm:text-lg opacity-70">You've completed all modules in {course.title}</p>
         </div>
 
-        <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-8 mb-6">
-          <h2 className="text-2xl font-bold mb-6">Course Summary</h2>
+        <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-4 sm:p-8 mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Course Summary</h2>
           
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <div>
               <h3 className="font-semibold mb-3">What You've Learned</h3>
               <ul className="space-y-2">
                 {course.modules.map((module, index) => (
                   <li key={module.id} className="flex items-center gap-2">
-                    <svg className="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-sm">{module.title}</span>
+                    <span className="text-xs sm:text-sm">{module.title}</span>
                   </li>
                 ))}
               </ul>
@@ -1023,37 +1024,37 @@ function CourseSummary({ course, userProgress, onStartQuiz, onBack }: {
               <h3 className="font-semibold mb-3">Course Statistics</h3>
               <div className="space-y-3">
                 <div className="flex justify-between">
-                  <span className="text-sm opacity-70">Modules Completed</span>
-                  <span className="font-semibold">{userProgress.completedModules.length}/{course.modules.length}</span>
+                  <span className="text-xs sm:text-sm opacity-70">Modules Completed</span>
+                  <span className="font-semibold text-sm">{userProgress.completedModules.length}/{course.modules.length}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm opacity-70">Time Invested</span>
-                  <span className="font-semibold">{course.duration}</span>
+                  <span className="text-xs sm:text-sm opacity-70">Time Invested</span>
+                  <span className="font-semibold text-sm">{course.duration}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-sm opacity-70">Difficulty Level</span>
-                  <span className="font-semibold">{course.difficulty}</span>
+                  <span className="text-xs sm:text-sm opacity-70">Difficulty Level</span>
+                  <span className="font-semibold text-sm">{course.difficulty}</span>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="text-center">
-            <h3 className="text-xl font-semibold mb-4">Ready for the Final Quiz?</h3>
-            <p className="opacity-70 mb-6">
+            <h3 className="text-lg sm:text-xl font-semibold mb-4">Ready for the Final Quiz?</h3>
+            <p className="opacity-70 mb-6 text-sm sm:text-base">
               Test your knowledge with 5 questions. You need to answer at least 3 correctly to complete the course.
             </p>
             
-            <div className="flex items-center justify-center gap-4">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <button
                 onClick={onBack}
-                className="px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition-all"
+                className="w-full sm:w-auto px-6 py-3 rounded-lg bg-white/10 hover:bg-white/20 transition-all text-sm sm:text-base"
               >
                 Back to Dashboard
               </button>
               <button
                 onClick={onStartQuiz}
-                className="px-8 py-3 rounded-lg bg-maroon text-white hover:bg-maroon/80 transition-all font-semibold"
+                className="w-full sm:w-auto px-8 py-3 rounded-lg bg-maroon text-white hover:bg-maroon/80 transition-all font-semibold text-sm sm:text-base"
               >
                 Start Quiz
               </button>
@@ -1094,10 +1095,10 @@ function QuizComponent({ course, answers, onAnswerChange, onSubmit, submitted, o
   return (
     <div className="min-h-screen p-4">
       <div className="max-w-4xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 hover:bg-white/20 dark:hover:bg-white/15 transition-all"
+            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 hover:bg-white/20 dark:hover:bg-white/15 transition-all text-sm sm:text-base"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -1105,35 +1106,35 @@ function QuizComponent({ course, answers, onAnswerChange, onSubmit, submitted, o
             Back
           </button>
           
-          <div className="text-center">
-            <h1 className="heading-serif text-2xl font-bold">{course.title} Quiz</h1>
-            <p className="text-sm opacity-70">Answer at least 3 out of 5 questions correctly</p>
+          <div className="text-center flex-1 sm:flex-none">
+            <h1 className="heading-serif text-xl sm:text-2xl font-bold">{course.title} Quiz</h1>
+            <p className="text-xs sm:text-sm opacity-70">Answer at least 3 out of 5 questions correctly</p>
           </div>
           
-          <div className="w-20"></div>
+          <div className="hidden sm:block w-20"></div>
         </div>
 
         {submitted && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`mb-6 p-6 rounded-2xl text-center ${
+            className={`mb-6 p-4 sm:p-6 rounded-2xl text-center ${
               isPassed() 
                 ? 'bg-green-500/20 border border-green-500/30' 
                 : 'bg-red-500/20 border border-red-500/30'
             }`}
           >
-            <div className="text-4xl mb-2">{isPassed() ? '🎉' : '😔'}</div>
-            <h2 className="text-xl font-bold mb-2">
+            <div className="text-3xl sm:text-4xl mb-2">{isPassed() ? '🎉' : '😔'}</div>
+            <h2 className="text-lg sm:text-xl font-bold mb-2">
               {isPassed() ? 'Congratulations!' : 'Not Quite There'}
             </h2>
-            <p className="mb-4">
+            <p className="mb-4 text-sm sm:text-base">
               You scored {getScore()} out of {course.quiz.length} questions correctly.
             </p>
             {isPassed() ? (
-              <p className="text-green-400">You have successfully completed the course!</p>
+              <p className="text-green-400 text-sm sm:text-base">You have successfully completed the course!</p>
             ) : (
-              <p className="text-red-400">You need at least 3 correct answers to pass. Please review the materials and try again.</p>
+              <p className="text-red-400 text-sm sm:text-base">You need at least 3 correct answers to pass. Please review the materials and try again.</p>
             )}
           </motion.div>
         )}
@@ -1145,9 +1146,9 @@ function QuizComponent({ course, answers, onAnswerChange, onSubmit, submitted, o
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-6"
+              className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl p-4 sm:p-6"
             >
-              <h3 className="text-lg font-semibold mb-4">
+              <h3 className="text-base sm:text-lg font-semibold mb-4">
                 {index + 1}. {question.question}
               </h3>
               
@@ -1157,7 +1158,7 @@ function QuizComponent({ course, answers, onAnswerChange, onSubmit, submitted, o
                     key={optionIndex}
                     onClick={() => handleAnswerSelect(question.id, optionIndex)}
                     disabled={submitted}
-                    className={`w-full text-left p-4 rounded-lg transition-all ${
+                    className={`w-full text-left p-3 sm:p-4 rounded-lg transition-all ${
                       answers[question.id] === optionIndex
                         ? submitted
                           ? optionIndex === question.correctAnswer
@@ -1170,18 +1171,18 @@ function QuizComponent({ course, answers, onAnswerChange, onSubmit, submitted, o
                     } ${submitted ? 'cursor-default' : 'cursor-pointer'}`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                      <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                         answers[question.id] === optionIndex
                           ? 'border-current'
                           : 'border-white/40'
                       }`}>
                         {answers[question.id] === optionIndex && (
-                          <div className="w-2 h-2 rounded-full bg-current"></div>
+                          <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-current"></div>
                         )}
                       </div>
-                      <span>{option}</span>
+                      <span className="text-sm sm:text-base flex-1">{option}</span>
                       {submitted && optionIndex === question.correctAnswer && (
-                        <svg className="w-4 h-4 text-green-400 ml-auto" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-4 h-4 text-green-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                         </svg>
                       )}
@@ -1198,7 +1199,7 @@ function QuizComponent({ course, answers, onAnswerChange, onSubmit, submitted, o
             <button
               onClick={onSubmit}
               disabled={!canSubmit()}
-              className="px-8 py-3 rounded-lg bg-maroon text-white hover:bg-maroon/80 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 rounded-lg bg-maroon text-white hover:bg-maroon/80 transition-all font-semibold disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
             >
               Submit Quiz
             </button>
