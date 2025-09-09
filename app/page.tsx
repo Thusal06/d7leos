@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const partnerLogos = [
   { src: '/logos/dp.png', alt: 'D7 District' },
@@ -18,15 +18,62 @@ const slides = [
 
 export default function HomePage() {
   const [index, setIndex] = useState(0);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
-    const id = setInterval(() => setIndex((i) => (i + 1) % slides.length), 4000);
-    return () => clearInterval(id);
+    const startInterval = () => {
+      intervalRef.current = setInterval(() => setIndex((i) => (i + 1) % slides.length), 4000);
+    };
+    
+    startInterval();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, []);
+
+  // Touch handlers for hero slideshow
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeThreshold = 50;
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      // Clear existing interval
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      
+      if (swipeDistance > 0) {
+        // Swipe left - next slide
+        setIndex((prev) => (prev + 1) % slides.length);
+      } else {
+        // Swipe right - previous slide
+        setIndex((prev) => (prev - 1 + slides.length) % slides.length);
+      }
+      
+      // Restart interval after manual swipe
+      setTimeout(() => {
+        intervalRef.current = setInterval(() => setIndex((i) => (i + 1) % slides.length), 4000);
+      }, 1000);
+    }
+  };
 
   return (
     <div className="space-y-10">
       {/* Hero with background slideshow */}
-      <div className="relative h-[55vh] md:h-[70vh] w-full overflow-hidden rounded-3xl glass">
+      <div 
+        className="relative h-[55vh] md:h-[70vh] w-full overflow-hidden rounded-3xl glass"
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {slides.map((src, i) => (
           <motion.div
             key={src}
@@ -35,10 +82,24 @@ export default function HomePage() {
             animate={{ opacity: i === index ? 1 : 0 }}
             transition={{ duration: 1.2 }}
           >
-            <Image src={src} alt="District event" fill className="object-cover" />
+            <Image src={src} alt="District event" fill className="object-cover select-none" draggable={false} />
           </motion.div>
         ))}
         <div className="absolute inset-0 bg-black/40" />
+        
+        {/* Slide indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setIndex(i)}
+              className={`w-2 h-2 rounded-full transition-colors ${
+                i === index ? 'bg-white' : 'bg-white/40'
+              }`}
+            />
+          ))}
+        </div>
+        
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
           <h1 className="heading-serif text-4xl md:text-6xl font-bold text-white">Leo District 306 D7</h1>
           <p className="mt-4 text-white/90 max-w-2xl">Fostering leadership through service — empowering youth, building communities, and creating impact.</p>

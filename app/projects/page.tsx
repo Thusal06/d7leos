@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 interface Project { 
@@ -93,10 +93,33 @@ export default function ProjectsPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [hoverImageIndex, setHoverImageIndex] = useState<{ [key: string]: number }>({});
+  const [preloadedImages, setPreloadedImages] = useState<{ [key: string]: HTMLImageElement[] }>({});
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
 
   const projects = useMemo(() => (
     active === 'all' ? allProjects : allProjects.filter(p => p.category === active)
   ), [active]);
+
+  // Preload images for smooth transitions
+  useEffect(() => {
+    const preloadProjectImages = async () => {
+      const imageCache: { [key: string]: HTMLImageElement[] } = {};
+      
+      for (const project of allProjects) {
+        imageCache[project.id] = [];
+        for (const imageSrc of project.gallery) {
+          const img = new Image();
+          img.src = imageSrc;
+          imageCache[project.id].push(img);
+        }
+      }
+      
+      setPreloadedImages(imageCache);
+    };
+
+    preloadProjectImages();
+  }, []);
 
   const nextImage = () => {
     if (open) {
@@ -115,7 +138,33 @@ export default function ProjectsPage() {
     setCurrentImageIndex(0);
   };
 
-  // Auto-slide functionality for hover
+  // Touch handlers for modal gallery
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!open) return;
+    
+    const swipeThreshold = 50;
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    
+    if (Math.abs(swipeDistance) > swipeThreshold) {
+      if (swipeDistance > 0) {
+        // Swipe left - next image
+        nextImage();
+      } else {
+        // Swipe right - previous image
+        prevImage();
+      }
+    }
+  };
+
+  // Auto-slide functionality for hover with preloaded images
   const handleMouseEnter = (projectId: string) => {
     setHoveredProject(projectId);
     const project = allProjects.find(p => p.id === projectId);
@@ -125,7 +174,7 @@ export default function ProjectsPage() {
           ...prev,
           [projectId]: ((prev[projectId] || 0) + 1) % project.gallery.length
         }));
-      }, 1500); // Change image every 1.5 seconds
+      }, 1200); // Reduced to 1.2 seconds for smoother experience
       
       // Store interval ID for cleanup
       (window as any)[`interval_${projectId}`] = interval;
@@ -178,7 +227,7 @@ export default function ProjectsPage() {
               initial={{ opacity: 0, scale: 0.96 }} 
               animate={{ opacity: 1, scale: 1 }} 
               exit={{ opacity: 0 }} 
-              className="glass rounded-xl overflow-hidden group hover:shadow-xl transition-all duration-300"
+              className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-xl overflow-hidden group hover:shadow-xl hover:bg-white/20 dark:hover:bg-white/15 transition-all duration-300"
               onMouseEnter={() => handleMouseEnter(p.id)}
               onMouseLeave={() => handleMouseLeave(p.id)}
             >
@@ -254,7 +303,7 @@ export default function ProjectsPage() {
               animate={{ y: 0, scale: 1 }} 
               exit={{ y: 10, scale: 0.95 }} 
               onClick={(e) => e.stopPropagation()} 
-              className="glass rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-2 sm:mx-4"
+              className="bg-white/95 dark:bg-black/95 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto mx-2 sm:mx-4"
             >
               {/* Header */}
               <div className="flex justify-between items-start p-4 sm:p-6 border-b border-white/10">
@@ -270,7 +319,7 @@ export default function ProjectsPage() {
                 </div>
                 <button 
                   onClick={() => setOpen(null)} 
-                  className="p-2 rounded-full glass hover:bg-white/20 transition-colors flex-shrink-0"
+                  className="p-2 rounded-full bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 hover:bg-white/20 dark:hover:bg-white/20 transition-colors flex-shrink-0"
                 >
                   <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -283,11 +332,17 @@ export default function ProjectsPage() {
                 <div className="space-y-3 sm:space-y-4">
                   <h4 className="font-semibold text-base sm:text-lg">Project Gallery</h4>
                   <div className="relative">
-                    <div className="aspect-video rounded-lg overflow-hidden bg-black/5">
+                    <div 
+                      className="aspect-video rounded-lg overflow-hidden bg-black/5"
+                      onTouchStart={handleTouchStart}
+                      onTouchMove={handleTouchMove}
+                      onTouchEnd={handleTouchEnd}
+                    >
                       <img
                         src={open.gallery[currentImageIndex]}
                         alt={`${open.title} - Image ${currentImageIndex + 1}`}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover select-none"
+                        draggable={false}
                       />
                     </div>
                     
@@ -339,7 +394,7 @@ export default function ProjectsPage() {
                   <p className="opacity-90 leading-relaxed text-sm sm:text-base">{open.description}</p>
                   
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
-                    <div className="glass rounded-lg p-3">
+                    <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-lg p-3">
                       <span className="opacity-70">Date: </span>
                       <span className="font-medium">
                         {new Date(open.date).toLocaleDateString('en-US', { 
@@ -349,7 +404,7 @@ export default function ProjectsPage() {
                         })}
                       </span>
                     </div>
-                    <div className="glass rounded-lg p-3">
+                    <div className="bg-white/10 dark:bg-white/10 backdrop-blur-md border border-white/20 dark:border-white/20 rounded-lg p-3">
                       <span className="opacity-70">Venue: </span>
                       <span className="font-medium">{open.venue}</span>
                     </div>
