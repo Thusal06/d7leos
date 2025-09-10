@@ -6,13 +6,43 @@ import { Footer } from '../components/footer';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: 'Leo District 306 D7',
+  metadataBase: new URL('https://d7leos.org'),
+  title: {
+    default: 'Leo District 306 D7',
+    template: '%s · Leo District 306 D7'
+  },
   description: 'Official website for Leo District 306 D7 — service, leadership, and growth.',
-  metadataBase: new URL('https://example.com'),
+  alternates: {
+    canonical: 'https://d7leos.org'
+  },
   openGraph: {
     title: 'Leo District 306 D7',
     description: 'Service, leadership, and growth.',
-    type: 'website'
+    url: 'https://d7leos.org',
+    siteName: 'Leo District 306 D7',
+    type: 'website',
+    locale: 'en_US',
+    images: [
+      { url: '/logos/dp.png', width: 512, height: 512, alt: 'Leo District 306 D7' }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Leo District 306 D7',
+    description: 'Service, leadership, and growth.',
+    images: ['/logos/dp.png']
+  },
+  icons: {
+    icon: [
+      { url: '/logos/dp.png' }
+    ],
+    apple: [
+      { url: '/logos/dp.png' }
+    ]
+  },
+  robots: {
+    index: true,
+    follow: true
   }
 };
 

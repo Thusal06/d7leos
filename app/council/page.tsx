@@ -66,7 +66,90 @@ const sections: Section[] = [
         role: 'District President', 
         name: 'Leo Lion Hansathi Imethma', 
         photo: photo('hansathi.jpg'),
-        biography: 'Leo Lion Hansathi Imethma serves as the District President of Leo District 306 D7, leading with passion and dedication. With extensive experience in youth leadership and community service, she has been instrumental in driving various initiatives across the district. Her leadership style focuses on empowerment, innovation, and sustainable community development.',
+        biography: `
+          <p><strong>Leo Lion Hansathi Imethma</strong> was born in <strong>2002</strong> to Mr. Manjula Gallage and Mrs. Sasika Nilani, as the eldest sister to two brothers. From a young age, she displayed a natural inclination toward leadership and community service, guided by a strong sense of empathy and a desire to make a positive impact. This passion shaped her academic and extracurricular journey, where she excelled both in studies and in diverse activities.</p>
+
+          <p><strong>Education & School Achievements</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Proud alumna of <strong>Asian Grammar School</strong></li>
+            <li>Achieved the <strong>best O/L results</strong> in her batch; completed <strong>A/Ls in Physical Science</strong></li>
+            <li>Active member of the <strong>Eastern Band</strong>, <strong>MUN Club</strong>, <strong>Netball Team</strong>, <strong>Swimming Squad</strong>, and <strong>Senior Dancing Troupe</strong></li>
+            <li>Awarded the <strong>Pahin Patha</strong> milestone as a traditional dancer</li>
+            <li>Named <strong>Most Outstanding Student</strong> for <strong>two consecutive years</strong></li>
+            <li>Served as a <strong>Prefect for four years</strong> and <strong>Head Prefect (2020/21)</strong></li>
+          </ul>
+
+          <p><strong>Higher Education & Professional Career</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Undergraduate at the <strong>Institute of Chemistry Ceylon</strong></li>
+            <li>Plays for the university <strong>basketball team</strong></li>
+            <li>Served as <strong>Junior Secretary</strong> of the Student’s Association (2024/25)</li>
+            <li><strong>Head of Business Operations</strong> at <strong>Angel Products</strong>, a leading bedding supplier in Sri Lanka</li>
+          </ul>
+
+          <p><strong>Leo Movement Journey</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Charter Member of the <strong>Leo Club of Asian Grammar School</strong> (2016/17)</li>
+            <li>Club roles:
+              <ul class="list-disc pl-5 mt-1">
+                <li><strong>Club Secretary</strong> (2017/18)</li>
+                <li><strong>Club Vice President</strong> (2018/19)</li>
+                <li><strong>4th Club President</strong> (2019/20)</li>
+              </ul>
+            </li>
+            <li>As Club President, coordinated <strong>30+ large-scale projects and fundraisers</strong>, including <em>AGS Winds Kite Festival</em> and <em>Literacy Academy</em></li>
+            <li>Later joined the <strong>Leo Club of Pannipitiya Metro Titans</strong> and served as <strong>Club Secretary (2022/23)</strong></li>
+          </ul>
+
+          <p><strong>District-Level Leadership (Leo District 306 C2)</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Regional Director</strong></li>
+            <li><strong>District Assistant Secretary</strong></li>
+            <li><strong>District Secretary</strong></li>
+            <li><strong>District Vice President</strong></li>
+            <li>Key contributions:
+              <ul class="list-disc pl-5 mt-1">
+                <li><strong>Project Secretary</strong> of <em>C2 Games 2020</em></li>
+                <li><strong>Organizer</strong> of the <em>Exodia 2021</em> Regional Orientation Series</li>
+                <li><strong>Project Chairman</strong> of the <em>19th Annual Leo District Conference (2023/24)</em></li>
+                <li><strong>Co-Chairman</strong> of <em>Battle of C’s 2025</em></li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><strong>Multiple District 306 Sri Lanka & Maldives</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Served as a <strong>Multiple Council Officer</strong></li>
+            <li>Contributions:
+              <ul class="list-disc pl-5 mt-1">
+                <li><strong>Project Secretary</strong> of the <em>Leo Multiple District Conference (2021/22)</em></li>
+                <li><strong>Project Secretary</strong> of the <em>Leo Multiple District Walk (2022)</em></li>
+                <li><strong>Co-Chairman</strong> of <em>Leo Multiple Service Week</em> and <em>Leo Day Celebrations (2024)</em></li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><strong>Lions Movement</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Helped charter the <strong>Leo Lions Club of Colombo Uptown Legends (2023/24)</strong></li>
+            <li>Elected as <strong>1st Vice President</strong> (2023/24)</li>
+            <li>Served as <strong>Club Director</strong> and <strong>Lions District Cabinet Member</strong> (2024/25)</li>
+          </ul>
+
+          <p><strong>Awards & Recognitions</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>International President’s Appreciation Certificates</strong></li>
+            <li><strong>Top 10 Leo Awards</strong> – Leo District 306 C2</li>
+            <li><strong>District Governor’s Appreciation Awards</strong></li>
+            <li><strong>District President’s Appreciation Awards</strong></li>
+            <li><strong>Most Outstanding Regional Director Award</strong></li>
+            <li><strong>Most Outstanding Council Officer Award</strong></li>
+            <li><strong>Leo of the Year</strong> at District, Multiple District, and <strong>International</strong> levels (2024/25)</li>
+          </ul>
+
+          <p><strong>Inspiration</strong></p>
+          <p>Leo Lion Hansathi Imethma’s story is one of <strong>dedication</strong>, <strong>resilience</strong>, and <strong>unwavering commitment</strong>. Her journey stands as an inspiration to many, embodying the true spirit of leadership, service, and excellence.</p>
+        `,
         gallery: ['/images/council/hansathi.jpg', '/logos/dp.png', '/logos/leo.png']
       },
       { 
@@ -290,7 +373,10 @@ function OfficialModal({ data, onClose }: { data: ModalData | null; onClose: () 
             {/* Right side - Biography */}
             <div>
               <h3 className="font-semibold text-lg mb-3">Biography</h3>
-              <p className="opacity-90 leading-relaxed">{data.biography}</p>
+              <div
+                className="opacity-90 leading-relaxed space-y-3"
+                dangerouslySetInnerHTML={{ __html: data.biography }}
+              />
             </div>
           </div>
         </motion.div>
