@@ -40,7 +40,71 @@ const sections: Section[] = [
         role: 'Immediate Past District Governor', 
         name: 'Lion Ranjith Fernando PMJF PMAF', 
         photo: photo('ranjith.jpg'),
-        biography: 'Lion Ranjith Fernando PMJF PMAF, as the Immediate Past District Governor, brings invaluable experience and institutional knowledge to the district leadership. His previous term as District Governor was characterized by significant growth in membership, successful completion of major service projects, and strengthening of inter-club relationships. As both a PMJF and PMAF, he continues to mentor current leadership while contributing his expertise to strategic planning and district development.',
+        biography: `
+          <p><strong>Lion Ranjith Fernando</strong> embodies a rare synergy of professional excellence, entrepreneurial vision, and service-driven leadership.</p>
+
+          <p><strong>Professional Journey</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Early career in banking; instrumental in establishing the <strong>Leasing Unit at People’s Bank</strong></li>
+            <li>Served as <strong>Branch Manager</strong> at <strong>Seylan Bank</strong></li>
+            <li>Expanded into entrepreneurship; built a successful footprint in the <strong>printing and packaging industry</strong></li>
+          </ul>
+
+          <p><strong>Academic & Credentials</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Bachelor of Commerce</strong> – University of Sri Jayewardenepura</li>
+            <li><strong>Associate Member</strong> – Institute of Bankers</li>
+            <li><strong>Finalist</strong> – Institute of Chartered Accountants of Sri Lanka</li>
+            <li>Advanced studies in <strong>Japan</strong> and <strong>India</strong></li>
+            <li>Led <strong>MASCO 85</strong> of his alma mater with distinction</li>
+          </ul>
+
+          <p><strong>Industry Leadership</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>President</strong> – Sri Lanka Association of Printers</li>
+            <li>Represented Sri Lanka at international platforms including the <strong>Export Development Board (EDB)</strong> and the <strong>Federation of Asia Print</strong></li>
+          </ul>
+
+          <p><strong>Lionism & Thought Leadership</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Rose through the ranks with unwavering dedication; crowned <strong>Most Outstanding Club President (2008)</strong></li>
+            <li>Served in numerous cabinet roles</li>
+            <li>Authored <strong>four publications</strong> on leadership and Lions governance</li>
+            <li>Recipient of the prestigious <strong>Leadership Medal</strong> from International President <strong>Douglas Alexander</strong></li>
+          </ul>
+
+          <p><strong>District Governor (2024/25) – “Together We Smile”</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Spearheaded a <strong>Rs. 40 million state-of-the-art Dialysis Center</strong> at <strong>KDU Hospital</strong> in partnership with <strong>LCIF</strong> and local funding</li>
+            <li>Led District 306C2 to global recognition:
+              <ul class="list-disc pl-5 mt-1">
+                <li><strong>Membership Hero Award</strong></li>
+                <li><strong>Membership Rockstar Award</strong> at the <strong>2025 International Convention (USA)</strong></li>
+                <li><strong>Kindness Matters Award</strong> – bestowed upon only <strong>30 districts worldwide</strong></li>
+              </ul>
+            </li>
+          </ul>
+
+          <p><strong>Beyond Lionism</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Published author and visiting lecturer</li>
+            <li>Polymath with passions spanning <strong>IT</strong>, <strong>AI</strong>, <strong>painting</strong>, <strong>music</strong>, and <strong>photography</strong></li>
+          </ul>
+
+          <p><strong>Family</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Married to <strong>Lion Lady Sriyani</strong></li>
+            <li>Father to two accomplished daughters: <strong>Anupama</strong> and <strong>Sewwandi</strong></li>
+          </ul>
+
+          <p><strong>Current Roles</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Immediate Past District Governor</strong> – 306C2</li>
+            <li><strong>Multiple Council Secretary</strong> – MD 306</li>
+          </ul>
+
+          <p>He exemplifies what it means to be a leader—in service, profession, and life.</p>
+        `,
         gallery: ['/images/council/ranjith.png', '/logos/lion.png', '/logos/dp.png']
       },
       { 
@@ -156,14 +220,168 @@ const sections: Section[] = [
         role: 'Immediate Past District President', 
         name: 'Leo Lion Sunera Naveed', 
         photo: photo('naveed.jpg'),
-        biography: 'Leo Lion Sunera Naveed, as the Immediate Past District President, brings invaluable experience and continuity to the district leadership. Having successfully led the district through significant growth and development, he continues to mentor and guide the current leadership team while contributing his expertise to various district initiatives.',
+        biography: `
+          <p><strong>Leo Lion Sunera Naveed</strong>, a prominent alumnus of <strong>Ananda College, Colombo 10</strong>, is the only child of Mr. Lasantha Prasad Lokupitiya and Mrs. Hasithri Yaswanthi Rodrigo. His journey is defined by leadership, innovation, and unwavering dedication to service.</p>
+
+          <p><strong>School Achievements & Leadership</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Colors' man</strong>, skilled <strong>hockey goalie</strong>, and <strong>Deputy Head Prefect</strong></li>
+            <li><strong>President Scout</strong> and <strong>national-level hockey player</strong> with multiple awards</li>
+            <li>Held key positions:
+              <ul class="list-disc pl-5 mt-1">
+                <li>Assistant Secretary – Interact Club</li>
+                <li>Editor – Astronomical Association</li>
+                <li>Media Coordinator – Young Inventors Society</li>
+                <li>Editor – Aeronautical Academy</li>
+                <li>Head of Media – ACMUN 2017 & 2018</li>
+                <li>Lead Organiser – Ananda Dalada Society</li>
+                <li>Treasurer – Ananda College Wall of Humanity</li>
+              </ul>
+            </li>
+            <li>Also a young inventor and guitarist</li>
+            <li>Represented Interact District Sri Lanka & Maldives at <em>Act Asia 2017</em> in Nepal</li>
+          </ul>
+
+          <p><strong>Early Leo Journey</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Joined the <strong>Leo Club of Ananda College</strong> to serve the community</li>
+            <li>Rose through the ranks to <strong>Director</strong> and <strong>Club President (2018/19)</strong></li>
+            <li>Chairperson of <em>Project Wilpattu</em> – won <strong>Most Outstanding Environment Project</strong></li>
+            <li>Under his leadership, the club secured <strong>12 honours</strong>, including <em>1st Runner-Up – Most Outstanding School-based Leo Club</em></li>
+            <li>Also served as Media Head – <em>Sri Lanka Crisis Simulation</em> and Director – <em>Rotaract Club of Centennial United</em></li>
+          </ul>
+
+          <p><strong>Expanding Service & Leadership</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Elected <strong>Charter Vice President</strong> of the first-ever <strong>Leo Lions Club of Ananda Alumni</strong> (2020/21)</li>
+            <li>Joined the <strong>Nawala Metro Leo Club</strong> to continue impactful community work</li>
+            <li>Held positions: <strong>Club Treasurer</strong>, <strong>District Membership Officer</strong>, and <strong>Treasurer of “Manudam”</strong></li>
+            <li>Awards: <strong>Most Disciplined Leo</strong> and <strong>1st Runner-Up – Most Outstanding Club Treasurer</strong></li>
+            <li>Elected <strong>Club President – Leo Club of Nawala Metro (2021/22)</strong>
+              <ul class="list-disc pl-5 mt-1">
+                <li>Achievements: <strong>Most Outstanding Leo Club</strong>, <strong>Most Outstanding Leo Club President</strong>, <strong>Excellence Award</strong>, and <strong>33+ club awards</strong></li>
+                <li>Also elected <strong>Club Vice President – Leo Lions Club of Ananda Alumni</strong></li>
+              </ul>
+            </li>
+            <li>As <strong>Immediate Past President (2022/23)</strong>, received <strong>1st Runner-Up – Most Outstanding Immediate Past President</strong></li>
+          </ul>
+
+          <p><strong>District, Multiple District & International</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>District Treasurer – Leo District 306 C2 (2023/24)</strong></li>
+            <li><strong>Co-Chair</strong> – <em>Mass Induction '23</em> of Leo Multiple District 306 (1,500 inductees)</li>
+            <li>Represented Sri Lanka & Maldives – <strong>Leo ISAAME Forum 2023 (Bangladesh)</strong></li>
+            <li>Captained House <strong>“Ernest”</strong> at <em>C2 Games</em> – won <strong>overall championship</strong></li>
+            <li>Charter Club President – <strong>Leo Lions Club of Colombo Uptown Legends</strong>, enabling Leos to transition to Lions</li>
+            <li>Recognized among the <strong>Top 30 Leos</strong> – Leo District 306 C2</li>
+            <li>Awards: <strong>International President Appreciation</strong>, <strong>District Governor’s Appreciation</strong>, <strong>5 Years of Leoism</strong></li>
+            <li>Completed <strong>District Lions Leadership Institute (DLLI)</strong>; supported <strong>Presidential LCIF</strong></li>
+            <li>Honoured with <strong>Leo of the Year</strong> – the highest lifetime recognition for a Leo</li>
+          </ul>
+
+          <p><strong>Professional & Entrepreneurship</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Head of Marketing</strong> – East Gate (Pvt) Ltd</li>
+            <li>Founded startups: <em>Xfinity.Ik</em> (online courses), <em>NAVE8</em>, <em>Infernation</em> (creative content & events), and <em>Mighty Bigfoot</em> (computer shop)</li>
+          </ul>
+
+          <p><strong>Role</strong>: Immediate Past District President</p>
+          <p>His journey showcases unwavering devotion to leadership, creativity, and community impact—blending academic excellence, entrepreneurship, and service.</p>
+        `,
         gallery: ['/images/council/naveed.jpg', '/logos/dp.png', '/logos/leo.png']
       },
       { 
         role: 'District Leo Club Chairperson', 
         name: 'Leo Lion Rahul Attanayake', 
         photo: photo('rahul.jpg'),
-        biography: 'Leo Lion Rahul Attanayake serves as the District Leo Club Chairperson, overseeing the development and coordination of Leo Clubs across the district. His commitment to youth development and organizational excellence has been pivotal in expanding the Leo movement and fostering leadership among young members.',
+        biography: `
+          <p><em>“Innovation is seeing what everybody has seen and thinking what nobody has thought.”</em> This quote reflects the journey of <strong>Leo Lion Rahul Attanayake PFLM</strong>, widely regarded as one of the most innovative Leos in the history of Leoism in Sri Lanka.</p>
+
+          <p><strong>Early Life & Education</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Only son with two elder sisters to Mr. D.R. Attanayake and Mrs. Rohini Attanayake</li>
+            <li>Completed primary and secondary education at <strong>Lyceum International School, Nugegoda</strong> (Cambridge curriculum)</li>
+          </ul>
+
+          <p><strong>Sports & Achievements</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li><strong>Two-time National Champion</strong> in <em>Wushu (Sanshou)</em> – 2014 & 2015</li>
+            <li>Holds the <strong>national record for the fastest knockout (2 seconds)</strong></li>
+            <li>Qualified <strong>Wushu referee</strong></li>
+          </ul>
+
+          <p><strong>Professional & Academic Path</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Youngest <strong>Alternate Channel Manager</strong> at <strong>Softlogic Life PLC</strong>, heading the <em>BOC Endowment Team</em></li>
+            <li>Graduate in Business – <strong>University of Glyndwr, UK</strong></li>
+            <li>Postgraduate qualifications:
+              <ul class="list-disc pl-5 mt-1">
+                <li><strong>MSc in Strategic Marketing</strong> – Asia E University</li>
+                <li><strong>MBA in General Management</strong> – University of Bedfordshire</li>
+                <li><strong>MSc in Business Psychology</strong> – University of Northampton</li>
+              </ul>
+            </li>
+            <li>Certified <strong>Life Coach</strong> and <strong>Workshop Facilitator</strong></li>
+          </ul>
+
+          <p><strong>Leo Journey & Iconic Projects</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Joined the <strong>Leo Club of Kottawa Central Golden City</strong> (2013); served as <strong>Club President (2016/17)</strong></li>
+            <li>Introduced groundbreaking projects:
+              <ul class="list-disc pl-5 mt-1">
+                <li><em>Henanigalata Mangachchamu</em></li>
+                <li><em>Maayam 64+</em></li>
+                <li><strong>Centennial Soccer League</strong> – Sri Lanka’s largest Leo Club sports event for 3 consecutive years; won <em>Best Sports & Recreation Project</em> at Multiple District level</li>
+                <li><em>Viru Karuna</em> – carried war heroes to the peak of Sri Pada</li>
+                <li><em>Nodutu Manaya</em> – interfaith religious chanting program at Borella Cemetery</li>
+              </ul>
+            </li>
+            <li>Awards: <strong>Leo of the Year – Leo District 306 C2</strong>, <strong>Most Outstanding Leo Executive – MD306 (2018/19)</strong>, <strong>Leo Scholar Award – 2019/20</strong></li>
+            <li>Delegate – <strong>1st-ever Leo ISAAME Forum 2016</strong> (Sri Lanka)</li>
+          </ul>
+
+          <p><strong>District & Multiple District Leadership</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Roles: <strong>District Coordinator – Youth Empowerment</strong>, <strong>District Treasurer</strong>, <strong>District Vice President</strong>, <strong>16th District President (2020/21)</strong></li>
+            <li>As District President (theme: <em>“Finding Yourself through Serving”</em>):
+              <ul class="list-disc pl-5 mt-1">
+                <li>Extended <strong>8 new Leo Clubs</strong> (4 Alpha, 4 Omega)</li>
+                <li>Reactivated <strong>6 clubs</strong> – total <strong>31 active clubs</strong></li>
+                <li>Achieved <strong>215% net membership growth</strong></li>
+                <li>Completed all district events despite the pandemic</li>
+              </ul>
+            </li>
+            <li>Introduced landmark initiatives:
+              <ul class="list-disc pl-5 mt-1">
+                <li>Leader’s Outing Eka</li>
+                <li>Clash of Zones</li>
+                <li>C2 Legends</li>
+                <li><strong>C2 Games Colombo 2020</strong> – mega inter-house event including aquatic and track & field</li>
+                <li><strong>Battle of C’s Cricket</strong> – inter-district (with Leo District 306 C1)</li>
+                <li><strong>Urban Adventures Leo Youth Camp</strong> – largest in Sri Lanka (170+ participants)</li>
+                <li><strong>Manudam</strong> – humanitarian mega project</li>
+                <li><strong>KPI Reporting System</strong> for district operations</li>
+                <li><strong>Life & Hospitalization Cover</strong> – first-ever insurance for a Leo District Council globally</li>
+              </ul>
+            </li>
+            <li>At the <strong>44th Annual Leo District Conference</strong>, Leo District 306 C2 won <strong>4 Winner Awards</strong> and <strong>1 Runner-Up Award</strong> at Multiple District level</li>
+            <li>Elected <strong>Multiple District Vice President (2021/22)</strong> and <strong>45th Multiple District President (2022/23)</strong> – Leo Multiple District 306 Sri Lanka</li>
+          </ul>
+
+          <p><strong>Multiple District Presidency Highlights</strong></p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>Introduced the <strong>FLM/PFLM Trust Program</strong> – grants for clubs, districts, and MD</li>
+            <li>Extended the <strong>first-ever Leo Club in the Maldives</strong> – a historic milestone</li>
+            <li>Oversaw the extension of <strong>35 new Leo Clubs</strong>, surpassing Lions MD306 membership</li>
+            <li>Rebranded and elevated the image of Leoism in Sri Lanka & Maldives</li>
+            <li>Conducted all MD events at a grand and innovative scale</li>
+            <li>Currently serves as <strong>District Leo Club Chairperson – Leo District 306 D7</strong></li>
+          </ul>
+
+          <p><strong>Legacy</strong></p>
+          <p>Rahul’s story is one of <strong>resilience</strong>, <strong>innovation</strong>, and <strong>transformational leadership</strong>. From record-breaking athlete to national leader, he has inspired thousands—proving that with vision and passion, the impossible becomes possible.</p>
+          <p><strong>Role</strong>: District Leo Club Chairperson</p>
+        `,
         gallery: ['/images/council/rahul.jpg', '/logos/dp.png', '/logos/leo.png']
       },
       { role: 'District Vice President', name: 'Leo Lion Senura Battage', photo: photo('senura.jpeg') },
@@ -395,9 +613,7 @@ export default function CouncilPage() {
       'Immediate Past District President', 
       'District Leo Club Chairperson',
       'District Governor',
-      'Immediate Past District Governor',
-      'First Vice District Governor',
-      'Second Vice District Governor'
+      'Immediate Past District Governor'
     ];
     return keyRoles.includes(role);
   };
