@@ -11,7 +11,7 @@ export function ThemeToggleButton() {
     <button
       onClick={toggle}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-      className="relative inline-flex items-center justify-center h-9 w-9 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 transition shadow-sm"
+      className="relative inline-flex items-center justify-center h-9 w-9 rounded-full border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/10 hover:bg-white/90 dark:hover:bg-white/20 transition"
     >
       {/* Sun (outline) - from Heroicons */}
       <svg
@@ -20,7 +20,7 @@ export function ThemeToggleButton() {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"
-        className={`h-5 w-5 text-[color:var(--tw-district-sun,#E1AD36)] ${isDark ? 'hidden' : 'block'}`}
+        className={`h-5 w-5 text-yellow-600 ${isDark ? 'hidden' : 'block'}`}
         aria-hidden="true"
       >
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v2m0 14v2m7.071-14.071l-1.414 1.414M6.343 17.657l-1.414 1.414M21 12h-2M5 12H3m14.657 6.657l-1.414-1.414M7.757 7.757L6.343 6.343M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -32,7 +32,7 @@ export function ThemeToggleButton() {
         fill="none"
         stroke="currentColor"
         strokeWidth="1.5"
-        className={`h-5 w-5 text-[color:var(--tw-district-moon,#EC69A2)] ${isDark ? 'block' : 'hidden'}`}
+        className={`h-5 w-5 text-yellow-300 ${isDark ? 'block' : 'hidden'}`}
         aria-hidden="true"
       >
         <path strokeLinecap="round" strokeLinejoin="round" d="M21 12.79A9 9 0 1111.21 3c.2 0 .39.01.58.03A7 7 0 1021 12.79z" />

@@ -642,7 +642,7 @@ export default function CouncilPage() {
               <motion.div
                 key={`${section.title}-${idx}-${m.name}`}
                 className={`glass rounded-xl overflow-hidden group w-full sm:w-64 ${
-                  shouldShowModal(m.role || '') ? 'cursor-pointer ring-0 hover:ring-2 hover:ring-[color:var(--tw-district-ring,#C41D66)]' : ''
+                  shouldShowModal(m.role || '') ? 'cursor-pointer hover:ring-2 hover:ring-white/30' : ''
                 }`}
                 whileHover={{ y: -6 }}
                 onClick={() => handleOfficialClick(m)}
