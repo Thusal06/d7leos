@@ -9,17 +9,29 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          100: '#F7B1C8',
-          300: '#EC69A2',
-          500: '#EA0880',
-          600: '#C41D66',
-          800: '#710F38'
+        petal: { // #F7B1C8
+          DEFAULT: '#F7B1C8'
         },
-        gold: {
-          100: '#F7EAC1',
-          400: '#E1AD36',
-          600: '#B2722A'
+        rose: { // #EC69A2
+          DEFAULT: '#EC69A2'
+        },
+        fuchsia: { // #EA0880
+          DEFAULT: '#EA0880'
+        },
+        crimson: { // #C41D66
+          DEFAULT: '#C41D66'
+        },
+        burgundy: { // #710F38
+          DEFAULT: '#710F38'
+        },
+        sand: { // #F7EAC1
+          DEFAULT: '#F7EAC1'
+        },
+        amberD7: { // #E1AD36
+          DEFAULT: '#E1AD36'
+        },
+        bronze: { // #B2722A
+          DEFAULT: '#B2722A'
         }
       },
       backdropBlur: {
