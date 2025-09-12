@@ -6,13 +6,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --bg: 245 245 245;
-  --fg: 15 15 15;
+  /* brand palette as CSS vars for gradients and custom usage */
+  --brand-100: 247 177 200;   /* #F7B1C8 */
+  --brand-300: 236 105 162;   /* #EC69A2 */
+  --brand-500: 234 8 128;     /* #EA0880 */
+  --brand-600: 196 29 102;    /* #C41D66 */
+  --brand-800: 113 15 56;     /* #710F38 */
+  --gold-100: 247 234 193;    /* #F7EAC1 */
+  --gold-400: 225 173 54;     /* #E1AD36 */
+  --gold-600: 178 114 42;     /* #B2722A */
+
+  /* theme surfaces */
+  --bg: 247 177 200; /* light background = brand-100 */
+  --fg: 17 17 17;    /* dark text on light */
+  --card: 255 255 255; /* light card */
+  --muted: 0 0 0 / 0.6; /* default overlay for borders */
 }
 
 .dark {
-  --bg: 10 10 10;
-  --fg: 240 240 240;
+  --bg: 17 14 18;       /* deep plum base for dark */
+  --fg: 245 240 246;     /* near-white on dark */
+  --card: 22 18 24;      /* slightly elevated card */
+  --muted: 255 255 255 / 0.2;
 }
 
 html, body {
@@ -22,18 +37,68 @@ html, body {
 body {
   font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: rgb(var(--fg));
-  background: radial-gradient(1200px 600px at 10% -10%, rgba(212, 175, 55, 0.12), transparent 50%),
-              radial-gradient(1200px 600px at 90% 110%, rgba(122, 28, 28, 0.15), transparent 50%),
-              rgb(var(--bg));
+  /* brand-forward backgrounds for both modes */
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(225, 173, 54, 0.18), transparent 55%),
+    radial-gradient(1200px 600px at 90% 110%, rgba(196, 29, 102, 0.18), transparent 55%),
+    rgb(var(--bg));
 }
 
-/* Liquid/Frosted glass utility */
+/* Liquid/Frosted glass utility tuned to palette */
 .glass {
-  @apply bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-glass;
+  @apply backdrop-blur-md shadow-glass;
+  background: linear-gradient(
+    to bottom right,
+    rgba(255,255,255,0.55),
+    rgba(255,255,255,0.25)
+  );
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.dark .glass {
+  background: linear-gradient(
+    to bottom right,
+    rgba(113, 15, 56, 0.22), /* brand-800 tint */
+    rgba(0,0,0,0.25)
+  );
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
+/* Headings: use display font + brand accents */
 .heading-serif {
   font-family: 'Josefin Sans', sans-serif;
+}
+
+h1, h2, h3, .heading-serif {
+  letter-spacing: 0.2px;
+}
+
+/* Accent underline for section headings */
+.section-title {
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -6px;
+  width: 56px; height: 3px;
+  background: linear-gradient(90deg, rgb(var(--brand-500)) 0%, rgb(var(--gold-400)) 100%);
+  border-radius: 999px;
+}
+
+/* Utility: brand gradient text */
+.text-gradient-brand {
+  background-image: linear-gradient(90deg, #EA0880, #E1AD36);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Base typography colors for headings and links */
+@layer base {
+  h1 { @apply text-brand-800 dark:text-brand-100; }
+  h2 { @apply text-brand-600 dark:text-brand-100; }
+  h3 { @apply text-brand-500 dark:text-gold-100; }
+  a  { @apply text-brand-600 hover:text-brand-500 dark:text-gold-400 dark:hover:text-gold-100; }
 }
 
 /* Simple page transition fade */

@@ -9,15 +9,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        maroon: {
-          DEFAULT: '#7A1C1C',
-          600: '#651717',
-          700: '#511313'
+        brand: {
+          100: '#F7B1C8',
+          300: '#EC69A2',
+          500: '#EA0880',
+          600: '#C41D66',
+          800: '#710F38'
         },
         gold: {
-          DEFAULT: '#D4AF37',
-          600: '#BD9D30',
-          700: '#A38A29'
+          100: '#F7EAC1',
+          400: '#E1AD36',
+          600: '#B2722A'
         }
       },
       backdropBlur: {
