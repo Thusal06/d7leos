@@ -9,15 +9,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        maroon: {
-          DEFAULT: '#7A1C1C',
-          600: '#651717',
-          700: '#511313'
-        },
-        gold: {
-          DEFAULT: '#D4AF37',
-          600: '#BD9D30',
-          700: '#A38A29'
+        district: {
+          pink1: '#F7B1C8', // light pink
+          pink2: '#EC69A2', // vibrant pink
+          pink3: '#EA0880', // fuchsia/magenta
+          crimson: '#C41D66',
+          maroon: '#710F38',
+          gold1: '#F7EAC1', // light gold
+          gold2: '#E1AD36', // gold
+          bronze: '#B2722A'  // bronze
         }
       },
       backdropBlur: {

@@ -8,11 +8,19 @@
 :root {
   --bg: 245 245 245;
   --fg: 15 15 15;
+  /* District accents (light) */
+  --accent-a: 247 177 200; /* #F7B1C8 */
+  --accent-b: 236 105 162; /* #EC69A2 */
+  --accent-c: 247 234 193; /* #F7EAC1 */
 }
 
 .dark {
   --bg: 10 10 10;
   --fg: 240 240 240;
+  /* District accents (dark) */
+  --accent-a: 196 29 102; /* #C41D66 */
+  --accent-b: 113 15 56;  /* #710F38 */
+  --accent-c: 225 173 54;  /* #E1AD36 */
 }
 
 html, body {
@@ -22,9 +30,12 @@ html, body {
 body {
   font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: rgb(var(--fg));
-  background: radial-gradient(1200px 600px at 10% -10%, rgba(212, 175, 55, 0.12), transparent 50%),
-              radial-gradient(1200px 600px at 90% 110%, rgba(122, 28, 28, 0.15), transparent 50%),
-              rgb(var(--bg));
+  /* Subtle district accent glows; keeps body base white/black via --bg */
+  background:
+    radial-gradient(1100px 520px at 12% -12%, rgba(var(--accent-c), 0.16), transparent 55%),
+    radial-gradient(1100px 520px at 88% 112%, rgba(var(--accent-a), 0.18), transparent 55%),
+    radial-gradient(900px 480px at 50% -20%, rgba(var(--accent-b), 0.10), transparent 60%),
+    rgb(var(--bg));
 }
 
 /* Liquid/Frosted glass utility */
